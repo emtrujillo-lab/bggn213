@@ -42,7 +42,7 @@ wisc.df$diagnosis
 ```{r}
 table(wisc.df$diagnosis)
 ```
-
+#test
 
 ```{r}
 table(wisc.df$diagnosis == "M")
