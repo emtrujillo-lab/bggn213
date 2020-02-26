@@ -1,0 +1,374 @@
+---
+title: "Class 15 Transcriptomics"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+## reasd the files you downloaded (countData and colDATA)
+
+```{r}
+read.csv("airway_scaledcounts.csv", stringsAsFactors = FALSE)
+```
+
+```{r}
+read.csv("airway_metadata.csv", stringsAsFactors = FALSE)
+```
+
+##now read the import countDATA and colData
+
+```{r}
+counts <- read.csv("airway_scaledcounts.csv", stringsAsFactors = FALSE)
+metadata <-  read.csv("airway_metadata.csv", stringsAsFactors = FALSE)
+```
+
+##how many genes do we have in thei dataset? `nrow(counts)`
+
+```{r}
+head(counts)
+```
+
+```{r}
+nrow(counts)
+```
+
+##in order to compare the treatment patients to the control groups data ... we have to find the mean of the `control` first 
+
+```{r}
+metadata
+```
+
+##`dex` column has the `control` and `treatment` groups. 
+
+```{r}
+metadata$dex =="control"
+```
+
+##now we need to just choose the `control`. NOw choose for the rows that are `control`. i.e. which ones from the `dex` columnn are `control`?
+
+```{r}
+metadata[metadata[,"dex"]=="control",]
+```
+
+##this is an alternative to print out the rows that are `control`
+```{r}
+metadata[metadata$dex =="control",]
+```
+
+#now you have to access the `id` 
+
+```{r}
+metadata[metadata$dex =="control", "id"]
+```
+
+##this is an alternative to getting `id`
+
+```{r}
+metadata[metadata$dex =="control",]$id
+```
+
+##this is the 3rd and last alternative to get `id`
+```{r}
+metadata[metadata$dex =="control", 1]
+```
+
+##accesss the count columns with `control$id`
+
+```{r}
+counts[ , control$id] #this should print out the 4 `control` columns
+```
+
+```{r}
+?rowSums()
+```
+
+##to get the mean we have to use `rowSums()` and divide by the number of columns which is `4`
+
+```{r}
+rowSums(counts[ , control$id])/4
+```
+
+##ithis is an alternative way to calculate the `mean`
+
+```{r}
+rowSums( counts[ ,control$id] )/4
+```
+
+
+```{r}
+
+```
+
+
+
+```{r}
+control <- metadata[metadata[,"dex"]=="control",]
+```
+
+```{r}
+control.mean <- rowSums( counts[ ,control$id] )/4 #we divide this by four because there are 4 control groups
+```
+
+```{r}
+names(control.mean) <- counts$ensgene
+```
+
+
+
+##now do the same for the control 
+
+```{r}
+metadata[metadata[,"dex"]=="treated",]
+```
+
+##make a new vector called `treated` from this data above
+
+```{r}
+treated <- metadata[metadata[,"dex"]=="treated",]
+```
+
+##find the mean of `treated`
+
+```{r}
+treated.mean <- rowMeans( counts[ ,treated$id] )/4
+```
+
+```{r}
+treated.mean
+```
+
+##now we need to combine our meancount data for bookeeping purposes
+```{r}
+mycounts <- data.frame(control.mean, treated.mean)
+```
+
+```{r}
+mycounts
+```
+
+##plot `control` vs `treated`
+
+```{r}
+plot(mycounts) #this plots the 1st column vs the 2nd column 
+```
+
+```{r}
+nrow(mycounts)
+```
+
+##where is all the data ... so now use a `histogram` and choose the control
+
+```{r}
+hist(mycounts$control.mean)
+```
+
+##get more bars (i.e. 300 of them)
+
+```{r}
+hist(mycounts$control.mean, breaks = 300)
+```
+
+##change scatterplot to `log log` you wast x axis to be log and y axis 
+
+```{r}
+plot(mycounts, log="xy")
+```
+
+##remove the `zero count genes` from your data b/c we can't say anything about them from this dataset
+
+##example
+
+```{r}
+x <- c(1, 3, 10, 0)
+x == 0  
+```
+
+```{r}
+which(x == 0) #will tell me which ones are the TRUE ones
+```
+
+```{r}
+x <- data.frame(c(1, 3, 10, 0), c(1, 3, 0 , 0))
+
+x == 0
+#which(x==0)
+```
+
+```{r}
+x <- data.frame(c(1, 3, 10, 0), c(1, 3, 0, 0))
+
+which(x==0) #scans the numbers and says which are TRUEly `zero`
+```
+
+```{r}
+x <- data.frame(c(1, 3, 10, 0), c(1, 3, 0, 0))
+
+which(x==0, arr.ind = TRUE) #tells me which genes are zero
+```
+
+```{r}
+x <- data.frame(c(1, 3, 10, 0), c(1, 3, 0, 0))
+
+unique(which(x==0, arr.ind = TRUE)[ , "row"]) #made it unique() to find the rows that have `zero`
+```
+
+##find `zero` rows in our mycounts object
+
+```{r}
+
+unique(which(mycounts==0, arr.ind = TRUE)[ , "row"])
+```
+
+##store this as `to.rm`
+```{r}
+to.rm <- unique(which(mycounts==0, arr.ind = TRUE)[ , "row"])
+```
+
+
+```{r}
+mycounts[to.rm,]
+```
+
+
+##but we want all the ones that are `NOT ZERO`
+
+```{r}
+to.rm <- unique(which(mycounts==0, arr.ind = TRUE)[ , "row"])
+mycounts[-to.rm,]
+```
+
+```{r}
+newcounts <- mycounts[-to.rm,]
+```
+
+##how many genes do you have that are not `zero`
+
+```{r}
+nrow(newcounts)
+```
+
+##use `log` so that you can calculate the `fold change`. but here we use `log2` (the log-ratio of a gene's or a transcript's expression values in two different conditions. While comparing two conditions each feature you analyse gets (normalised) expression values. This value can be zero and thus lead to undefined ratios)
+
+
+```{r}
+log2(newcounts[,"treated.mean"]/newcounts[,"control.mean"])
+```
+
+```{r}
+newcounts$log2fc <-log2(newcounts[,"treated.mean"]/newcounts[,"control.mean"])
+```
+
+```{r}
+head(newcounts)
+```
+
+##negative means its going down in the treatment . positive means its going up in the treatment. IF its +2 then its upregulated. IF its -2 then its downregulated. 
+
+##common rule of thumb in the field is to use a log2fc (log2 fold change). How many of our genes are upregulated from this?
+
+```{r}
+newcounts$log2fc > 2
+```
+
+```{r}
+sum(newcounts$log2fc > 2)
+```
+
+#how many are downregulated in this threshold
+
+```{r}
+sum(newcounts$log2fc < -2)
+```
+
+##let's use DESeq2 
+
+```{r}
+library(DESeq2)
+```
+
+#design: where in the data
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData=counts, colData=metadata, design=~dex, tidy=TRUE)
+```
+
+```{r}
+dds
+```
+```{r}
+dds <- DESeq(dds)
+```
+
+
+
+```{r}
+res <- results (dds)
+res
+```
+
+
+#make a volcano plot
+
+Lot of log2fc vs p-value
+
+```{r}
+plot(res$log2FoldChange, res$padj)
+```
+
+```{r}
+plot(res$log2FoldChange, log(res$padj))
+```
+
+#add a `negative` to the *log*
+```{r}
+plot(res$log2FoldChange, -log(res$padj))
+```
+
+##add some colors 
+
+```{r}
+plot(res$log2FoldChange, -log(res$padj))
+abline(v=c(-2,2), lty=2)
+```
+
+```{r}
+plot(res$log2FoldChange, -log(res$padj), col="gray")
+abline(v=c(-2,2), lty=2)
+```
+
+##want genes that are significant. `v` is for vertical and `h` is for horizontal
+
+```{r}
+plot(res$log2FoldChange, -log(res$padj), col="gray")
+abline(v=c(-2,2), lty=2)
+abline(h=log(0.05), lty=2)
+```
+
+```{r}
+# Setup our custom point color vector 
+mycols <- rep("gray", nrow(res))
+mycols[ abs(res$log2FoldChange) > 2 ]  <- "red" 
+
+inds <- (res$padj < 0.01) & (abs(res$log2FoldChange) > 2 )
+mycols[ inds ] <- "blue"
+
+# Volcano plot with custom colors 
+plot( res$log2FoldChange,  -log(res$padj), 
+ col=mycols, ylab="-Log(P-value)", xlab="Log2(FoldChange)" )
+
+# Cut-off lines
+abline(v=c(-2,2), col="gray", lty=2)
+abline(h=-log(0.1), col="gray", lty=2)
+```
+
+
+
+
+
+

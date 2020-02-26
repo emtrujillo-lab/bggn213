@@ -1,0 +1,111 @@
+---
+title: "Structure based drug design"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+#Download "1hsg" form PDB into the RStudio Project directoty, then cleanup the HIV-Pr. We will make a separate set of "protein-only" and "ligand-only" PDB files
+
+```{r}
+library(bio3d)
+```
+
+```{r}
+file.name <- get.pdb("1hsg")
+```
+
+##now the file form PDB ("1hsg") is stored as a file to the right
+
+#We will use `read.pdb()`, `atom.select()`, and `write.pdb()` functions to make our seperate "protein-only" and "ligand-only" PDB files
+
+```{r}
+read.pdb(file.name)
+```
+
+```{r}
+hiv <- read.pdb(file.name)
+hiv
+```
+
+```{r}
+prot <- atom.select(hiv, "protein", value=TRUE)
+```
+```{r}
+lig <- atom.select(hiv, "ligand", value=TRUE)
+```
+
+##review whether you have MK1 as you ligand
+
+```{r}
+lig
+```
+
+##now review the prot
+
+```{r}
+prot
+```
+
+
+#This will give you files on the right hand side. One file each for protein and for ligand
+
+```{r}
+write.pdb(prot, file="1hsg_protein.pdb")
+```
+
+
+```{r}
+write.pdb(lig, file="1hsg_ligand.pdb")
+```
+
+##you can do this process on anything 
+
+#now switch over to AutoDock Tools(ADT) from teh MGLTools you just downloaded
+
+
+##make sure to get the files that have the protein charges into this folder
+
+#go to the terminal and type in ` "\Program Files (x86)\The Scripps Research Institute\Vina\vina.exe" --help` in terminal 
+
+#no type this in 
+```{r}
+res <- read.pdb("all.pdbqt", multi=TRUE)
+write.pdb(res, "results.pdb")
+
+```
+
+##Read the original ligand with added hydrogens that you produced earlier and use the `rmsd()` function to compare to your docking results
+
+```{r}
+res2 <- read.pdb("all.pdbqt", multi=TRUE)
+```
+```{r}
+ori <- read.pdb("ligand.pdbqt")
+```
+
+```{r}
+rmsd(ori, res2)
+```
+
+```{r}
+res2
+```
+
+```{r}
+pdb <- read.pdb("1hel")
+modes <- nma( pdb )
+m7 <- mktrj(modes, mode=7, file="mode_7.pdb")
+```
+
+```{r}
+library(DESeq2)
+```
+
+
