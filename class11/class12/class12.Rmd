@@ -1,0 +1,151 @@
+---
+title: "class12"
+author: "elizabeth trujillo"
+date: "2/14/2020"
+output: github__document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+### PDB Statistics 
+
+Download a CSV file from the PDB site (accessible from “Analyze” > “PDB Statistics” > “by Experimental Method and Molecular Type”. Move this CSV file into your RStudio project and use it to answer the following questions:
+
+Q: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+
+
+```{r}
+stats <- read.csv("Data Export Summary.csv", row.names = 1)
+stats
+```
+
+```{r}
+stats$Total / sum(stats$Total)
+```
+```{r}
+ans <- round(stats$Total / sum(stats$Total) * 100, 2)
+names(ans) <- rownames(stats)
+```
+
+
+
+Q: What proportion of structures in the PDB are protein?
+
+```{r}
+sum(stats$proteins)
+```
+
+```{r}
+sum(stats$Total)
+```
+
+
+```{r}
+sum(stats$Proteins) / sum(stats$Total) 
+```
+
+```{r}
+(sum(stats$Proteins) / sum(stats$Total)) * 100
+```
+
+#need to get this to work
+```{r}
+round(sum(stats$Proteins) / (sum(stats$Total) * 100, 2)
+```
+
+
+
+Q: Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+##load bio3d to analyse protein structure data 
+
+use the bio3d package from CRAN
+
+```{r}
+library(bio3d)
+
+pdb <- read.pdb("1hsg")
+pdb
+```
+
+
+# More questions.  How many amino acid residues are there in this pdb object? 
+
+198
+
+Q: Name one of the two non-protein residues? HOH and MK21
+ 2
+Q: How many protein chains are in this structure? 2
+
+```{r}
+library("bio3d")
+```
+
+
+```{r}
+library("bio3d")
+
+pdb <- read.pdb("1AKE")
+pdb
+```
+
+```{r}
+hits <- NULL
+hits$pdb.id <- c('1AKE_A','4X8M_A','6S36_A','6RZE_A','4X8H_A','3HPR_A','1E4V_A','5EJE_A','1E4Y_A','3X2S_A','6HAP_A','6HAM_A','4K46_A','4NP6_A','3GMT_A','4PZL_A')
+```
+
+#download and parse these structures
+
+```{r}
+#download related PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+```{r}
+library(rgl)
+```
+
+
+```{r}
+library(bio3d.view)
+view(pdbs)
+```
+
+
+```{r}
+pc <- pca(pdbs)
+plot(pc)
+```
+
+
+```{r}
+pc.xray <- pca(pdbs)
+```
+
+```{r}
+
+```
+ 
+
+#Make a PCA trajectory
+
+
+
+
+
+
+
+
+
+
