@@ -328,3 +328,19 @@ print(paste("Total number of significant genes:", length(sig_genes)))
 write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
 ```
 
+#now go to the reactome website
+
+x <- 1:10 Predict without using R the result of: x[ c(TRUE, FALSE) ]
+```{r}
+x <- 1:10
+x[ c(TRUE, FALSE) ]
+```
+```{r}
+1:10 * 10
+```
+```{r}
+c("a", 1, TRUE)
+```
+
+
+
