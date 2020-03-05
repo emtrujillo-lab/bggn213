@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Corona virus hw"
 output: github_document
 ---
 
@@ -18,6 +18,9 @@ url <- "https://tinyurl.com/COVID-2019"
 virus <- read.csv(url)
 
 tail(virus)
+```
+```{r}
+table(virus$cases)
 ```
 
 
@@ -50,18 +53,24 @@ virus[inds,]
 
 ```{r}
 sum(virus[inds, "cases"])
+```
 
+```{r}
 total_cases <- sum(virus$cases)
 ```
 
 
-
 ## Q3. What is the overall death rate?
+
+
+inds <- virus$type == "death"
 
 ```{r}
 death_cases <- sum(virus[inds, "cases"])
 death_cases
 ```
+
+
 
 ```{r}
 round(death_cases/total_cases *100, 2)
@@ -69,6 +78,8 @@ round(death_cases/total_cases *100, 2)
 
 
 ## Q4. What is the death rate in China?
+
+
 
 ```{r}
 table(virus$Country.Region)
@@ -78,55 +89,59 @@ table(virus$Country.Region)
 virus$Country.Region == "Mainland China"
 ```
 
+## number of total cases in `Mainland.China`
 ```{r}
-sum(virus$Country.Region == "Mainland China")
+sum(virus[virus$Country.Region == "Mainland China", "cases"])
+
+China_total <- sum(virus[virus$Country.Region == "Mainland China", "cases"])
 ```
 
-## Make `china_total` a vector
-```{r}
-China_total <- sum(virus$Country.Region == "Mainland China")
-```
-
-```{r}
-China_total
-```
-
-
-## make `China_deaths` vectors 
-
-```{r}
-
-china_deaths <- sum(virus$Country.Region == "Mainland China"&virus$type == "death")
-
-china_deaths
-```
+## number of total deaths in `Mainland.China`
 
 
 ```{r}
-round(china_deaths/China_total * 100, 2)
+sum(virus$Country.Region == "Mainland China" & virus$type == "death")
+
+China_deaths <- sum(virus$Country.Region == "Mainland China" & virus$type == "death")
 ```
 
+
+
+## rate of `Mainland.China` deaths
+
+
+```{r}
+round(China_deaths/china_total * 100, 2)
+```
 
 
 
 
 ## Q5. What is the death rate in Italy, Iran and the US?
 
-##italy 
-```{r}
-sum(virus$Country.Region == "Italy")
-```
+##italy
+
 
 ```{r}
-Italy_total <- sum(virus$Country.Region == "Italy")
+sum(virus$Country.Region == "Italy" & virus$type == "death")
 
-Italy_total
+Italy_deaths <- sum(virus$Country.Region == "Italy" & virus$type == "death")
 ```
+
+sum(virus[virus$type == "death", "cases"])
+
+
+##use this for total cases
 ```{r}
-Italy_deaths <- sum(virus$Country.Region == "Italy"&virus$type == "death")
-
-Italy_deaths
+virus[virus$Country.Region == "Italy", "cases"]
 ```
+##use this for total cases
+```{r}
+sum(virus[virus$Country.Region == "Italy", "cases"])
+
+Italy_total <- sum(virus[virus$Country.Region == "Italy", "cases"])
+```
+
 
 ```{r}
 round(Italy_deaths/Italy_total * 100, 2)
@@ -135,21 +150,23 @@ round(Italy_deaths/Italy_total * 100, 2)
 
 ##Iran
 
-```{r}
-sum(virus$Country.Region == "Iran")
-```
 
 ```{r}
-Iran_total <- sum(virus$Country.Region == "Iran")
+sum(virus$Country.Region == "Iran" & virus$type == "death")
 
-Iran_total
+Iran_deaths <- sum(virus$Country.Region == "Iran" & virus$type == "death")
 ```
 
+
+
+
+##use this for total cases
 ```{r}
-Iran_deaths <- sum(virus$Country.Region == "Iran"&virus$type == "death")
+sum(virus[virus$Country.Region == "Iran", "cases"])
 
-Iran_deaths
+Iran_total <- sum(virus[virus$Country.Region == "Iran", "cases"])
 ```
+
 
 
 ```{r}
@@ -157,30 +174,23 @@ round(Iran_deaths/Iran_total * 100, 2)
 ```
 
 
+
 #US
 
 ```{r}
-sum(virus$Country.Region == "US")
+sum(virus$Country.Region == "US" & virus$type == "death")
+
+US_deaths <- sum(virus$Country.Region == "US" & virus$type == "death")
 ```
 
 
-
-
+##use this for total cases
 ```{r}
-round(72/total_cases * 100, 2)
+sum(virus[virus$Country.Region == "US", "cases"])
+
+US_total <- sum(virus[virus$Country.Region == "US", "cases"])
 ```
 
-```{r}
-US_total <- sum(virus$Country.Region == "US")
-
-US_total
-```
-
-```{r}
-US_deaths <- sum(virus$Country.Region == "US"&virus$type == "death")
-
-US_deaths
-```
 
 ```{r}
 round(US_deaths/US_total * 100, 2)
