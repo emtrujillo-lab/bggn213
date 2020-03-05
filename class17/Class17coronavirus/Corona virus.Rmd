@@ -1,0 +1,62 @@
+---
+title: "Corona Virus"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+
+```{r}
+url <- "https://tinyurl.com/COVID-2019"
+
+virus <- read.csv(url)
+
+tail(virus)
+```
+
+## Q1. How many total infected cases are there around the world?
+#check in cases and sum it up
+
+```{r}
+sum(virus$cases)
+```
+
+```{r}
+table(virus$type)
+```
+
+```{r}
+inds <- virus$type == "death"
+
+virus[inds,]
+
+##use square brackets to print out all the ones that have high death
+```
+
+
+
+```{r}
+sum(virus[inds, "cases"])
+
+total_cases <- sum(virus$cases)
+```
+
+## Q3. What is the overall death rate?
+
+```{r}
+death_cases <- sum(virus[inds, "cases"])
+death_cases
+```
+
+```{r}
+round(death_cases/total_cases *100, 2)
+```
+
+
+
+
+
+
