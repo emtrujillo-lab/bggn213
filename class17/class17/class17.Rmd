@@ -98,37 +98,41 @@ China_total <- sum(virus[virus$Country.Region == "Mainland China", "cases"])
 
 ## number of total deaths in `Mainland.China`
 
-
 ```{r}
-sum(virus$Country.Region == "Mainland China" & virus$type == "death")
+library(dplyr)
 
-China_deaths <- sum(virus$Country.Region == "Mainland China" & virus$type == "death")
+dplyr::filter(virus, Country.Region == "Mainland China", virus$type == "death")
 ```
 
+```{r}
+virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"]
+```
+
+```{r}
+sum(virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"])
+
+China_deaths <- sum(virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"])
+```
 
 
 ## rate of `Mainland.China` deaths
 
-
 ```{r}
-round(China_deaths/china_total * 100, 2)
+round(China_deaths/China_total * 100, 2)
 ```
-
-
 
 
 ## Q5. What is the death rate in Italy, Iran and the US?
 
 ##italy
 
-
+## number of deaths in Italy
 ```{r}
-sum(virus$Country.Region == "Italy" & virus$type == "death")
+sum(virus[virus$Country.Region == "Italy" & virus$type == "death", "cases"])
 
-Italy_deaths <- sum(virus$Country.Region == "Italy" & virus$type == "death")
+Italy_deaths <- sum(virus[virus$Country.Region == "Italy" & virus$type == "death", "cases"])
 ```
 
-sum(virus[virus$type == "death", "cases"])
 
 
 ##use this for total cases
@@ -150,11 +154,12 @@ round(Italy_deaths/Italy_total * 100, 2)
 
 ##Iran
 
+## number of deaths in Iran 
 
 ```{r}
-sum(virus$Country.Region == "Iran" & virus$type == "death")
+sum(virus[virus$Country.Region == "Iran" & virus$type == "death", "cases"])
 
-Iran_deaths <- sum(virus$Country.Region == "Iran" & virus$type == "death")
+Iran_deaths <- sum(virus[virus$Country.Region == "Iran" & virus$type == "death", "cases"])
 ```
 
 
@@ -178,9 +183,9 @@ round(Iran_deaths/Iran_total * 100, 2)
 #US
 
 ```{r}
-sum(virus$Country.Region == "US" & virus$type == "death")
+sum(virus[virus$Country.Region == "US" & virus$type == "death", "cases"])
 
-US_deaths <- sum(virus$Country.Region == "US" & virus$type == "death")
+US_deaths <- sum(virus[virus$Country.Region == "US" & virus$type == "death", "cases"])
 ```
 
 

@@ -25,6 +25,44 @@ tail(virus)
     ## 2776       Xinjiang Mainland China 41.1129  85.2401 2020-03-04     1 recovered
     ## 2777       Zhejiang Mainland China 29.1832 120.0934 2020-03-04    21 recovered
 
+``` r
+table(virus$cases)
+```
+
+    ## 
+    ##   -20   -11    -8    -5    -4    -3    -2    -1     1     2     3     4     5 
+    ##     1     1     1     1     1     1     3     8   640   329   200   145   130 
+    ##     6     7     8     9    10    11    12    13    14    15    16    17    18 
+    ##   106    94    66    52    55    62    41    49    39    34    31    29    28 
+    ##    19    20    21    22    23    24    25    26    27    28    29    30    31 
+    ##    32    26    22    20    24    19    12    13    10    19    20    14    10 
+    ##    32    33    34    35    36    37    38    39    40    41    42    43    44 
+    ##    11     6    17    14    12    11     8     9    10     8     9     7     5 
+    ##    45    46    47    48    49    50    51    52    53    55    56    57    58 
+    ##     7     4     3     6     4     5     8     8     2     2     3     4     5 
+    ##    59    60    61    62    63    64    65    66    67    68    69    70    71 
+    ##     4     1    10     1     3     3     3     4     2     4     3     4     3 
+    ##    72    73    74    75    77    78    79    81    82    85    87    88    89 
+    ##     4     3     4     2     1     2     1     4     2     1     1     2     1 
+    ##    91    93    94    97    99   100   101   103   105   106   108   109   110 
+    ##     2     5     2     1     3     2     1     1     2     1     1     1     1 
+    ##   111   114   115   116   123   127   131   132   136   139   143   144   147 
+    ##     1     1     2     2     1     1     1     2     1     1     1     1     1 
+    ##   149   169   184   196   202   203   205   212   220   229   231   233   240 
+    ##     1     1     1     1     2     2     1     1     1     1     1     1     1 
+    ##   242   261   284   297   298   318   324   342   349   356   365   385   401 
+    ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
+    ##   409   411   417   423   427   435   444   466   499   505   523   566   570 
+    ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
+    ##   571   586   587   599   773   813   835   849   851   903  1016  1209  1223 
+    ##     1     2     1     1     1     1     1     1     1     1     1     1     1 
+    ##  1266  1315  1347  1349  1405  1422  1451  1638  1693  1807  1843  1933  1998 
+    ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
+    ##  2097  2131  2147  2223  2274  2345  2349  2398  2414  2447  2531  2543  2590 
+    ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
+    ##  2841  2987  3020  3156  3418  4024  6200 14840 
+    ##     1     1     1     1     1     1     1     1
+
 ## Q1. How many total infected cases are there around the world?
 
 \#check in cases and sum it up
@@ -877,6 +915,8 @@ total_cases <- sum(virus$cases)
 
 ## Q3. What is the overall death rate?
 
+inds \<- virus$type == “death”
+
 ``` r
 death_cases <- sum(virus[inds, "cases"])
 death_cases
@@ -1193,128 +1233,310 @@ virus$Country.Region == "Mainland China"
     ## [2761]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
     ## [2773]  TRUE  TRUE  TRUE  TRUE  TRUE
 
-``` r
-sum(virus$Country.Region == "Mainland China")
-```
-
-    ## [1] 1933
-
-## Make `china_total` a vector
+## number of total cases in `Mainland.China`
 
 ``` r
-China_total <- sum(virus$Country.Region == "Mainland China")
+sum(virus[virus$Country.Region == "Mainland China", "cases"])
 ```
+
+    ## [1] 133207
 
 ``` r
-China_total
+China_total <- sum(virus[virus$Country.Region == "Mainland China", "cases"])
 ```
 
-    ## [1] 1933
-
-## make `China_deaths` vectors
+## number of total deaths in `Mainland.China`
 
 ``` r
-china_deaths <- sum(virus$Country.Region == "Mainland China"&virus$type == "death")
-
-china_deaths
+library(dplyr)
 ```
 
-    ## [1] 135
+    ## Warning: package 'dplyr' was built under R version 3.6.3
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
 
 ``` r
-round(china_deaths/China_total * 100, 2)
+dplyr::filter(virus, Country.Region == "Mainland China", virus$type == "death")
 ```
 
-    ## [1] 6.98
+    ##     Province.State Country.Region      Lat     Long       date cases  type
+    ## 1            Hubei Mainland China 30.97560 112.2707 2020-01-22    17 death
+    ## 2            Hebei Mainland China 38.04280 114.5149 2020-01-23     1 death
+    ## 3     Heilongjiang Mainland China 47.86200 127.7615 2020-01-24     1 death
+    ## 4            Hubei Mainland China 30.97560 112.2707 2020-01-24     7 death
+    ## 5            Hubei Mainland China 30.97560 112.2707 2020-01-25    16 death
+    ## 6            Henan Mainland China 33.88202 113.6140 2020-01-26     1 death
+    ## 7            Hubei Mainland China 30.97560 112.2707 2020-01-26    12 death
+    ## 8         Shanghai Mainland China 31.20200 121.4491 2020-01-26     1 death
+    ## 9          Beijing Mainland China 40.18240 116.4142 2020-01-27     1 death
+    ## 10          Hainan Mainland China 19.19590 109.7453 2020-01-27     1 death
+    ## 11           Hubei Mainland China 30.97560 112.2707 2020-01-27    24 death
+    ## 12           Hubei Mainland China 30.97560 112.2707 2020-01-28    49 death
+    ## 13           Henan Mainland China 33.88202 113.6140 2020-01-29     1 death
+    ## 14         Sichuan Mainland China 30.61710 102.7103 2020-01-29     1 death
+    ## 15    Heilongjiang Mainland China 47.86200 127.7615 2020-01-30     1 death
+    ## 16           Hubei Mainland China 30.97560 112.2707 2020-01-30    37 death
+    ## 17           Hubei Mainland China 30.97560 112.2707 2020-01-31    42 death
+    ## 18       Chongqing Mainland China 30.05720 107.8740 2020-02-01     1 death
+    ## 19           Hubei Mainland China 30.97560 112.2707 2020-02-01    45 death
+    ## 20       Chongqing Mainland China 30.05720 107.8740 2020-02-02     1 death
+    ## 21           Hubei Mainland China 30.97560 112.2707 2020-02-02   101 death
+    ## 22           Hubei Mainland China 30.97560 112.2707 2020-02-03    64 death
+    ## 23           Hubei Mainland China 30.97560 112.2707 2020-02-04    65 death
+    ## 24         Guizhou Mainland China 26.81540 106.8748 2020-02-05     1 death
+    ## 25           Hubei Mainland China 30.97560 112.2707 2020-02-05    70 death
+    ## 26         Tianjin Mainland China 39.30540 117.3230 2020-02-05     1 death
+    ## 27    Heilongjiang Mainland China 47.86200 127.7615 2020-02-06     1 death
+    ## 28           Hubei Mainland China 30.97560 112.2707 2020-02-06    69 death
+    ## 29       Guangdong Mainland China 23.34170 113.4244 2020-02-07     1 death
+    ## 30          Hainan Mainland China 19.19590 109.7453 2020-02-07     1 death
+    ## 31           Henan Mainland China 33.88202 113.6140 2020-02-07     1 death
+    ## 32           Hubei Mainland China 30.97560 112.2707 2020-02-07    81 death
+    ## 33           Jilin Mainland China 43.66610 126.1923 2020-02-07     1 death
+    ## 34         Beijing Mainland China 40.18240 116.4142 2020-02-08     1 death
+    ## 35           Gansu Mainland China 36.06110 103.8343 2020-02-08     1 death
+    ## 36    Heilongjiang Mainland China 47.86200 127.7615 2020-02-08     2 death
+    ## 37           Henan Mainland China 33.88202 113.6140 2020-02-08     1 death
+    ## 38           Hubei Mainland China 30.97560 112.2707 2020-02-08    81 death
+    ## 39           Hunan Mainland China 27.61040 111.7088 2020-02-08     1 death
+    ## 40           Anhui Mainland China 31.82570 117.2264 2020-02-09     1 death
+    ## 41           Gansu Mainland China 36.06110 103.8343 2020-02-09     1 death
+    ## 42         Guangxi Mainland China 23.82980 108.7881 2020-02-09     1 death
+    ## 43          Hainan Mainland China 19.19590 109.7453 2020-02-09     1 death
+    ## 44           Hebei Mainland China 38.04280 114.5149 2020-02-09     1 death
+    ## 45    Heilongjiang Mainland China 47.86200 127.7615 2020-02-09     1 death
+    ## 46           Henan Mainland China 33.88202 113.6140 2020-02-09     2 death
+    ## 47           Hubei Mainland China 30.97560 112.2707 2020-02-09    91 death
+    ## 48        Shandong Mainland China 36.34270 118.1498 2020-02-09     1 death
+    ## 49           Anhui Mainland China 31.82570 117.2264 2020-02-10     2 death
+    ## 50    Heilongjiang Mainland China 47.86200 127.7615 2020-02-10     1 death
+    ## 51           Hubei Mainland China 30.97560 112.2707 2020-02-10   103 death
+    ## 52         Jiangxi Mainland China 27.61400 115.7221 2020-02-10     1 death
+    ## 53           Anhui Mainland China 31.82570 117.2264 2020-02-11     1 death
+    ## 54         Beijing Mainland China 40.18240 116.4142 2020-02-11     1 death
+    ## 55       Chongqing Mainland China 30.05720 107.8740 2020-02-11     1 death
+    ## 56    Heilongjiang Mainland China 47.86200 127.7615 2020-02-11     1 death
+    ## 57           Henan Mainland China 33.88202 113.6140 2020-02-11     1 death
+    ## 58           Hubei Mainland China 30.97560 112.2707 2020-02-11    94 death
+    ## 59         Tianjin Mainland China 39.30540 117.3230 2020-02-11     1 death
+    ## 60          Hainan Mainland China 19.19590 109.7453 2020-02-12     1 death
+    ## 61           Henan Mainland China 33.88202 113.6140 2020-02-12     1 death
+    ## 62           Hunan Mainland China 27.61040 111.7088 2020-02-12     1 death
+    ## 63        Liaoning Mainland China 41.29560 122.6085 2020-02-12     1 death
+    ## 64        Shandong Mainland China 36.34270 118.1498 2020-02-12     1 death
+    ## 65           Anhui Mainland China 31.82570 117.2264 2020-02-13     1 death
+    ## 66       Chongqing Mainland China 30.05720 107.8740 2020-02-13     1 death
+    ## 67       Guangdong Mainland China 23.34170 113.4244 2020-02-13     1 death
+    ## 68         Guangxi Mainland China 23.82980 108.7881 2020-02-13     1 death
+    ## 69           Hebei Mainland China 38.04280 114.5149 2020-02-13     1 death
+    ## 70    Heilongjiang Mainland China 47.86200 127.7615 2020-02-13     1 death
+    ## 71           Henan Mainland China 33.88202 113.6140 2020-02-13     2 death
+    ## 72           Hubei Mainland China 30.97560 112.2707 2020-02-13   242 death
+    ## 73         Tianjin Mainland China 39.30540 117.3230 2020-02-13     1 death
+    ## 74        Xinjiang Mainland China 41.11290  85.2401 2020-02-13     1 death
+    ## 75           Anhui Mainland China 31.82570 117.2264 2020-02-14     1 death
+    ## 76       Chongqing Mainland China 30.05720 107.8740 2020-02-14     1 death
+    ## 77    Heilongjiang Mainland China 47.86200 127.7615 2020-02-14     2 death
+    ## 78           Henan Mainland China 33.88202 113.6140 2020-02-14     1 death
+    ## 79           Hubei Mainland China 30.97560 112.2707 2020-02-14   147 death
+    ## 80         Beijing Mainland China 40.18240 116.4142 2020-02-15     1 death
+    ## 81           Henan Mainland China 33.88202 113.6140 2020-02-15     2 death
+    ## 82           Hubei Mainland China 30.97560 112.2707 2020-02-15   139 death
+    ## 83           Hubei Mainland China 30.97560 112.2707 2020-02-16   100 death
+    ## 84           Hunan Mainland China 27.61040 111.7088 2020-02-16     1 death
+    ## 85         Sichuan Mainland China 30.61710 102.7103 2020-02-16     2 death
+    ## 86       Guangdong Mainland China 23.34170 113.4244 2020-02-17     2 death
+    ## 87           Henan Mainland China 33.88202 113.6140 2020-02-17     3 death
+    ## 88           Hubei Mainland China 30.97560 112.2707 2020-02-17    93 death
+    ## 89         Guizhou Mainland China 26.81540 106.8748 2020-02-18     1 death
+    ## 90           Hebei Mainland China 38.04280 114.5149 2020-02-18     1 death
+    ## 91           Henan Mainland China 33.88202 113.6140 2020-02-18     3 death
+    ## 92           Hubei Mainland China 30.97560 112.2707 2020-02-18   132 death
+    ## 93           Hunan Mainland China 27.61040 111.7088 2020-02-18     1 death
+    ## 94        Shandong Mainland China 36.34270 118.1498 2020-02-18     1 death
+    ## 95       Guangdong Mainland China 23.34170 113.4244 2020-02-19     1 death
+    ## 96    Heilongjiang Mainland China 47.86200 127.7615 2020-02-19     1 death
+    ## 97           Hubei Mainland China 30.97560 112.2707 2020-02-19   108 death
+    ## 98        Shanghai Mainland China 31.20200 121.4491 2020-02-19     1 death
+    ## 99          Yunnan Mainland China 24.97400 101.4870 2020-02-19     1 death
+    ## 100      Chongqing Mainland China 30.05720 107.8740 2020-02-20     1 death
+    ## 101         Fujian Mainland China 26.07890 117.9874 2020-02-20     1 death
+    ## 102          Hebei Mainland China 38.04280 114.5149 2020-02-20     1 death
+    ## 103          Hubei Mainland China 30.97560 112.2707 2020-02-20   115 death
+    ## 104        Shaanxi Mainland China 35.19170 108.8701 2020-02-20     1 death
+    ## 105       Shandong Mainland China 36.34270 118.1498 2020-02-20     1 death
+    ## 106         Yunnan Mainland China 24.97400 101.4870 2020-02-20     1 death
+    ## 107       Zhejiang Mainland China 29.18320 120.0934 2020-02-20     1 death
+    ## 108          Hebei Mainland China 38.04280 114.5149 2020-02-22     1 death
+    ## 109          Hubei Mainland China 30.97560 112.2707 2020-02-22   202 death
+    ## 110       Shanghai Mainland China 31.20200 121.4491 2020-02-22     1 death
+    ## 111       Xinjiang Mainland China 41.11290  85.2401 2020-02-22     1 death
+    ## 112      Guangdong Mainland China 23.34170 113.4244 2020-02-23     1 death
+    ## 113         Hainan Mainland China 19.19590 109.7453 2020-02-23     1 death
+    ## 114          Hubei Mainland China 30.97560 112.2707 2020-02-24   149 death
+    ## 115       Shandong Mainland China 36.34270 118.1498 2020-02-24     1 death
+    ## 116      Guangdong Mainland China 23.34170 113.4244 2020-02-25     1 death
+    ## 117          Hubei Mainland China 30.97560 112.2707 2020-02-25    68 death
+    ## 118       Shandong Mainland China 36.34270 118.1498 2020-02-25     1 death
+    ## 119          Hubei Mainland China 30.97560 112.2707 2020-02-26    52 death
+    ## 120        Beijing Mainland China 40.18240 116.4142 2020-02-27     1 death
+    ## 121   Heilongjiang Mainland China 47.86200 127.7615 2020-02-27     1 death
+    ## 122          Henan Mainland China 33.88202 113.6140 2020-02-27     1 death
+    ## 123          Hubei Mainland China 30.97560 112.2707 2020-02-27    26 death
+    ## 124        Beijing Mainland China 40.18240 116.4142 2020-02-28     2 death
+    ## 125          Hubei Mainland China 30.97560 112.2707 2020-02-28    41 death
+    ## 126       Xinjiang Mainland China 41.11290  85.2401 2020-02-28     1 death
+    ## 127        Beijing Mainland China 40.18240 116.4142 2020-02-29     1 death
+    ## 128          Henan Mainland China 33.88202 113.6140 2020-02-29     1 death
+    ## 129          Hubei Mainland China 30.97560 112.2707 2020-02-29    45 death
+    ## 130          Henan Mainland China 33.88202 113.6140 2020-03-01     1 death
+    ## 131          Hubei Mainland China 30.97560 112.2707 2020-03-01    34 death
+    ## 132          Hubei Mainland China 30.97560 112.2707 2020-03-02    42 death
+    ## 133          Hubei Mainland China 30.97560 112.2707 2020-03-03    32 death
+    ## 134 Inner Mongolia Mainland China 44.09350 113.9448 2020-03-03     1 death
+    ## 135          Hubei Mainland China 30.97560 112.2707 2020-03-04    36 death
+
+``` r
+virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"]
+```
+
+    ##   [1]  17   1   1   7  16   1  12   1   1   1  24  49   1   1   1  37  42   1
+    ##  [19]  45   1 101  64  65   1  70   1   1  69   1   1   1  81   1   1   1   2
+    ##  [37]   1  81   1   1   1   1   1   1   1   2  91   1   2   1 103   1   1   1
+    ##  [55]   1   1   1  94   1   1   1   1   1   1   1   1   1   1   1   1   2 242
+    ##  [73]   1   1   1   1   2   1 147   1   2 139 100   1   2   2   3  93   1   1
+    ##  [91]   3 132   1   1   1   1 108   1   1   1   1   1 115   1   1   1   1   1
+    ## [109] 202   1   1   1   1 149   1   1  68   1  52   1   1   1  26   2  41   1
+    ## [127]   1   1  45   1  34  42  32   1  36
+
+``` r
+sum(virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"])
+```
+
+    ## [1] 2981
+
+``` r
+China_deaths <- sum(virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"])
+```
+
+## rate of `Mainland.China` deaths
+
+``` r
+round(China_deaths/China_total * 100, 2)
+```
+
+    ## [1] 2.24
 
 ## Q5. What is the death rate in Italy, Iran and the US?
 
 \#\#italy
 
-``` r
-sum(virus$Country.Region == "Italy")
-```
-
-    ## [1] 38
+## number of deaths in Italy
 
 ``` r
-Italy_total <- sum(virus$Country.Region == "Italy")
-
-Italy_total
+sum(virus[virus$Country.Region == "Italy" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 38
+    ## [1] 107
 
 ``` r
-Italy_deaths <- sum(virus$Country.Region == "Italy"&virus$type == "death")
-
-Italy_deaths
+Italy_deaths <- sum(virus[virus$Country.Region == "Italy" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 13
+\#\#use this for total cases
+
+``` r
+virus[virus$Country.Region == "Italy", "cases"]
+```
+
+    ##  [1]   2   1  17   1  42   1   1  93   1   1  74   4  -1  93   3 131   2   2 202
+    ## [20]   5  42 233   4   1 240   8 566   5  37 342  18  66 466  27  11 587  28 116
+
+\#\#use this for total cases
+
+``` r
+sum(virus[virus$Country.Region == "Italy", "cases"])
+```
+
+    ## [1] 3472
+
+``` r
+Italy_total <- sum(virus[virus$Country.Region == "Italy", "cases"])
+```
 
 ``` r
 round(Italy_deaths/Italy_total * 100, 2)
 ```
 
-    ## [1] 34.21
+    ## [1] 3.08
 
 \#\#Iran
 
-``` r
-sum(virus$Country.Region == "Iran")
-```
-
-    ## [1] 35
+## number of deaths in Iran
 
 ``` r
-Iran_total <- sum(virus$Country.Region == "Iran")
-
-Iran_total
+sum(virus[virus$Country.Region == "Iran" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 35
+    ## [1] 92
 
 ``` r
-Iran_deaths <- sum(virus$Country.Region == "Iran"&virus$type == "death")
-
-Iran_deaths
+Iran_deaths <- sum(virus[virus$Country.Region == "Iran" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 14
+\#\#use this for total cases
+
+``` r
+sum(virus[virus$Country.Region == "Iran", "cases"])
+```
+
+    ## [1] 3566
+
+``` r
+Iran_total <- sum(virus[virus$Country.Region == "Iran", "cases"])
+```
 
 ``` r
 round(Iran_deaths/Iran_total * 100, 2)
 ```
 
-    ## [1] 40
+    ## [1] 2.58
 
 \#US
 
 ``` r
-sum(virus$Country.Region == "US")
+sum(virus[virus$Country.Region == "US" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 81
+    ## [1] 11
 
 ``` r
-US_total <- sum(virus$Country.Region == "US")
-
-US_total
+US_deaths <- sum(virus[virus$Country.Region == "US" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 81
+\#\#use this for total cases
 
 ``` r
-US_deaths <- sum(virus$Country.Region == "US"&virus$type == "death")
-
-US_deaths
+sum(virus[virus$Country.Region == "US", "cases"])
 ```
 
-    ## [1] 6
+    ## [1] 172
+
+``` r
+US_total <- sum(virus[virus$Country.Region == "US", "cases"])
+```
 
 ``` r
 round(US_deaths/US_total * 100, 2)
 ```
 
-    ## [1] 7.41
+    ## [1] 6.4
