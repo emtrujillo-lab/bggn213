@@ -17,13 +17,13 @@ virus <- read.csv(url)
 tail(virus)
 ```
 
-    ##      Province.State Country.Region     Lat     Long       date cases      type
-    ## 2772        Shaanxi Mainland China 35.1917 108.8701 2020-03-04     7 recovered
-    ## 2773       Shandong Mainland China 36.3427 118.1498 2020-03-04     5 recovered
-    ## 2774       Shanghai Mainland China 31.2020 121.4491 2020-03-04     4 recovered
-    ## 2775        Sichuan Mainland China 30.6171 102.7103 2020-03-04    12 recovered
-    ## 2776       Xinjiang Mainland China 41.1129  85.2401 2020-03-04     1 recovered
-    ## 2777       Zhejiang Mainland China 29.1832 120.0934 2020-03-04    21 recovered
+    ##      Province.State Country.Region      Lat     Long       date cases      type
+    ## 2881         Shanxi Mainland China  37.5777 112.2922 2020-03-05     2 recovered
+    ## 2882        Sichuan Mainland China  30.6171 102.7103 2020-03-05    19 recovered
+    ## 2883        Tianjin Mainland China  39.3054 117.3230 2020-03-05     4 recovered
+    ## 2884       Victoria      Australia -37.8136 144.9631 2020-03-05     3 recovered
+    ## 2885       Xinjiang Mainland China  41.1129  85.2401 2020-03-05     1 recovered
+    ## 2886       Zhejiang Mainland China  29.1832 120.0934 2020-03-05    10 recovered
 
 ``` r
 table(virus$cases)
@@ -31,37 +31,39 @@ table(virus$cases)
 
     ## 
     ##   -20   -11    -8    -5    -4    -3    -2    -1     1     2     3     4     5 
-    ##     1     1     1     1     1     1     3     8   640   329   200   145   130 
+    ##     1     1     1     1     1     1     3     8   670   346   209   152   133 
     ##     6     7     8     9    10    11    12    13    14    15    16    17    18 
-    ##   106    94    66    52    55    62    41    49    39    34    31    29    28 
+    ##   110    97    68    53    58    63    42    49    40    35    31    30    28 
     ##    19    20    21    22    23    24    25    26    27    28    29    30    31 
-    ##    32    26    22    20    24    19    12    13    10    19    20    14    10 
+    ##    33    27    22    22    24    20    12    13    11    19    21    15    12 
     ##    32    33    34    35    36    37    38    39    40    41    42    43    44 
-    ##    11     6    17    14    12    11     8     9    10     8     9     7     5 
+    ##    11     6    17    14    12    12     8     9    10     9     9     7     6 
     ##    45    46    47    48    49    50    51    52    53    55    56    57    58 
-    ##     7     4     3     6     4     5     8     8     2     2     3     4     5 
+    ##     7     4     3     7     4     5     8     8     2     2     3     4     5 
     ##    59    60    61    62    63    64    65    66    67    68    69    70    71 
-    ##     4     1    10     1     3     3     3     4     2     4     3     4     3 
+    ##     5     1    10     2     3     3     3     4     2     4     3     4     3 
     ##    72    73    74    75    77    78    79    81    82    85    87    88    89 
     ##     4     3     4     2     1     2     1     4     2     1     1     2     1 
-    ##    91    93    94    97    99   100   101   103   105   106   108   109   110 
-    ##     2     5     2     1     3     2     1     1     2     1     1     1     1 
-    ##   111   114   115   116   123   127   131   132   136   139   143   144   147 
-    ##     1     1     2     2     1     1     1     2     1     1     1     1     1 
-    ##   149   169   184   196   202   203   205   212   220   229   231   233   240 
-    ##     1     1     1     1     2     2     1     1     1     1     1     1     1 
-    ##   242   261   284   297   298   318   324   342   349   356   365   385   401 
+    ##    91    92    93    94    97    99   100   101   103   105   106   108   109 
+    ##     2     1     5     2     1     3     2     1     1     2     1     1     1 
+    ##   110   111   114   115   116   123   127   131   132   134   136   138   139 
+    ##     1     1     1     2     2     1     1     1     2     1     1     1     1 
+    ##   143   144   147   149   169   184   187   196   202   203   205   212   220 
+    ##     1     1     1     1     1     1     1     1     2     2     1     1     2 
+    ##   229   231   233   240   242   261   284   297   298   318   324   342   349 
     ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
-    ##   409   411   417   423   427   435   444   466   499   505   523   566   570 
+    ##   356   365   385   401   409   411   417   423   427   435   444   466   467 
     ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
-    ##   571   586   587   599   773   813   835   849   851   903  1016  1209  1223 
-    ##     1     2     1     1     1     1     1     1     1     1     1     1     1 
-    ##  1266  1315  1347  1349  1405  1422  1451  1638  1693  1807  1843  1933  1998 
+    ##   499   505   523   566   570   571   586   587   591   599   769   773   813 
+    ##     1     1     1     1     1     1     2     1     1     1     1     1     1 
+    ##   835   849   851   903  1016  1209  1223  1266  1315  1347  1349  1405  1422 
     ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
-    ##  2097  2131  2147  2223  2274  2345  2349  2398  2414  2447  2531  2543  2590 
+    ##  1451  1638  1693  1807  1843  1933  1998  2035  2097  2131  2147  2223  2274 
     ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
-    ##  2841  2987  3020  3156  3418  4024  6200 14840 
-    ##     1     1     1     1     1     1     1     1
+    ##  2345  2349  2398  2414  2447  2531  2543  2590  2841  2987  3020  3156  3418 
+    ##     1     1     1     1     1     1     1     1     1     1     1     1     1 
+    ##  4024  6200 14840 
+    ##     1     1     1
 
 ## Q1. How many total infected cases are there around the world?
 
@@ -71,7 +73,7 @@ table(virus$cases)
 sum(virus$cases)
 ```
 
-    ## [1] 149549
+    ## [1] 155031
 
 ## Q2. How many deaths linked to infected cases have there been?
 
@@ -475,7 +477,23 @@ virus$type
     ## [2752] recovered recovered recovered recovered recovered recovered recovered
     ## [2759] recovered recovered recovered recovered recovered recovered recovered
     ## [2766] recovered recovered recovered recovered recovered recovered recovered
-    ## [2773] recovered recovered recovered recovered recovered
+    ## [2773] recovered recovered recovered recovered recovered confirmed confirmed
+    ## [2780] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2787] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2794] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2801] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2808] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2815] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2822] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2829] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2836] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2843] confirmed confirmed confirmed confirmed confirmed confirmed confirmed
+    ## [2850] confirmed death     death     death     death     death     death    
+    ## [2857] death     death     death     recovered recovered recovered recovered
+    ## [2864] recovered recovered recovered recovered recovered recovered recovered
+    ## [2871] recovered recovered recovered recovered recovered recovered recovered
+    ## [2878] recovered recovered recovered recovered recovered recovered recovered
+    ## [2885] recovered recovered
     ## Levels: confirmed death recovered
 
 ``` r
@@ -484,7 +502,7 @@ table(virus$type)
 
     ## 
     ## confirmed     death recovered 
-    ##      1520       203      1054
+    ##      1593       212      1081
 
 ``` r
 inds <- virus$type == "death"
@@ -698,6 +716,15 @@ virus[inds,]
     ## 2746              King County, WA             US  47.60620 -122.3321 2020-03-04
     ## 2747              New South Wales      Australia -33.86880  151.2093 2020-03-04
     ## 2748            Placer County, CA             US  39.09160 -120.8039 2020-03-04
+    ## 2851                                      France  47.00000    2.0000 2020-03-05
+    ## 2852                                        Iran  32.00000   53.0000 2020-03-05
+    ## 2853                                       Italy  43.00000   12.0000 2020-03-05
+    ## 2854                                       Spain  40.00000   -4.0000 2020-03-05
+    ## 2855                                 Switzerland  46.81820    8.2275 2020-03-05
+    ## 2856                                          UK  55.00000   -3.0000 2020-03-05
+    ## 2857                       Hainan Mainland China  19.19590  109.7453 2020-03-05
+    ## 2858                        Hubei Mainland China  30.97560  112.2707 2020-03-05
+    ## 2859              King County, WA             US  47.60620 -122.3321 2020-03-05
     ##      cases  type
     ## 30      17 death
     ## 60       1 death
@@ -902,12 +929,21 @@ virus[inds,]
     ## 2746     3 death
     ## 2747     1 death
     ## 2748     1 death
+    ## 2851     2 death
+    ## 2852    15 death
+    ## 2853    41 death
+    ## 2854     1 death
+    ## 2855     1 death
+    ## 2856     1 death
+    ## 2857     1 death
+    ## 2858    31 death
+    ## 2859     1 death
 
 ``` r
 sum(virus[inds, "cases"])
 ```
 
-    ## [1] 3254
+    ## [1] 3348
 
 ``` r
 total_cases <- sum(virus$cases)
@@ -922,13 +958,13 @@ death_cases <- sum(virus[inds, "cases"])
 death_cases
 ```
 
-    ## [1] 3254
+    ## [1] 3348
 
 ``` r
 round(death_cases/total_cases *100, 2)
 ```
 
-    ## [1] 2.18
+    ## [1] 2.16
 
 ## Q4. What is the death rate in China?
 
@@ -937,64 +973,66 @@ table(virus$Country.Region)
 ```
 
     ## 
-    ##          Afghanistan              Algeria              Andorra 
-    ##                    1                    4                    1 
-    ##            Argentina              Armenia            Australia 
-    ##                    1                    1                   40 
-    ##              Austria           Azerbaijan              Bahrain 
-    ##                    7                    1                    8 
-    ##              Belarus              Belgium               Brazil 
-    ##                    2                    6                    3 
-    ##             Cambodia               Canada                Chile 
-    ##                    2                   22                    1 
-    ##              Croatia       Czech Republic              Denmark 
-    ##                    7                    3                    5 
-    ##   Dominican Republic              Ecuador                Egypt 
-    ##                    1                    3                    3 
-    ##              Estonia        Faroe Islands              Finland 
-    ##                    2                    1                    5 
-    ##               France              Georgia              Germany 
-    ##                   24                    2                   23 
-    ##            Gibraltar               Greece            Hong Kong 
-    ##                    1                    5                   49 
-    ##              Hungary              Iceland                India 
-    ##                    1                    5                    6 
-    ##            Indonesia                 Iran                 Iraq 
-    ##                    1                   35                    9 
-    ##              Ireland               Israel                Italy 
-    ##                    3                    9                   38 
-    ##                Japan               Jordan               Kuwait 
-    ##                   47                    1                    6 
-    ##               Latvia              Lebanon        Liechtenstein 
-    ##                    1                    6                    1 
-    ##            Lithuania           Luxembourg                Macau 
-    ##                    1                    1                   15 
-    ##       Mainland China             Malaysia               Mexico 
-    ##                 1933                   22                    4 
-    ##               Monaco              Morocco                Nepal 
-    ##                    1                    1                    2 
-    ##          Netherlands          New Zealand              Nigeria 
-    ##                    6                    2                    1 
-    ##      North Macedonia               Norway                 Oman 
-    ##                    1                    7                    7 
-    ##               Others             Pakistan          Philippines 
-    ##                   21                    3                    5 
-    ##               Poland             Portugal                Qatar 
-    ##                    1                    2                    4 
-    ##              Romania               Russia     Saint Barthelemy 
-    ##                    4                    3                    1 
-    ##           San Marino         Saudi Arabia              Senegal 
-    ##                    5                    1                    3 
-    ##            Singapore          South Korea                Spain 
-    ##                   46                   54                   14 
-    ##            Sri Lanka               Sweden          Switzerland 
-    ##                    2                    8                    9 
-    ##               Taiwan             Thailand              Tunisia 
-    ##                   32                   29                    1 
-    ##                   UK              Ukraine United Arab Emirates 
-    ##                   14                    1                   13 
-    ##                   US              Vietnam 
-    ##                   81                   13
+    ##            Afghanistan                Algeria                Andorra 
+    ##                      1                      4                      1 
+    ##              Argentina                Armenia              Australia 
+    ##                      1                      1                     44 
+    ##                Austria             Azerbaijan                Bahrain 
+    ##                      8                      2                      9 
+    ##                Belarus                Belgium Bosnia and Herzegovina 
+    ##                      2                      7                      1 
+    ##                 Brazil               Cambodia                 Canada 
+    ##                      3                      2                     25 
+    ##                  Chile                Croatia         Czech Republic 
+    ##                      2                      7                      4 
+    ##                Denmark     Dominican Republic                Ecuador 
+    ##                      5                      1                      4 
+    ##                  Egypt                Estonia          Faroe Islands 
+    ##                      4                      3                      1 
+    ##                Finland                 France                Georgia 
+    ##                      6                     26                      3 
+    ##                Germany              Gibraltar                 Greece 
+    ##                     24                      1                      6 
+    ##              Hong Kong                Hungary                Iceland 
+    ##                     50                      1                      6 
+    ##                  India              Indonesia                   Iran 
+    ##                      7                      1                     38 
+    ##                   Iraq                Ireland                 Israel 
+    ##                      9                      3                     10 
+    ##                  Italy                  Japan                 Jordan 
+    ##                     41                     48                      1 
+    ##                 Kuwait                 Latvia                Lebanon 
+    ##                      7                      1                      7 
+    ##          Liechtenstein              Lithuania             Luxembourg 
+    ##                      1                      1                      1 
+    ##                  Macau         Mainland China               Malaysia 
+    ##                     15                   1964                     22 
+    ##                 Mexico                 Monaco                Morocco 
+    ##                      4                      1                      2 
+    ##                  Nepal            Netherlands            New Zealand 
+    ##                      2                      7                      2 
+    ##                Nigeria        North Macedonia                 Norway 
+    ##                      1                      1                      8 
+    ##                   Oman                 Others               Pakistan 
+    ##                      8                     21                      3 
+    ##              Palestine            Philippines                 Poland 
+    ##                      1                      5                      1 
+    ##               Portugal                  Qatar                Romania 
+    ##                      3                      4                      5 
+    ##                 Russia       Saint Barthelemy             San Marino 
+    ##                      4                      1                      6 
+    ##           Saudi Arabia                Senegal              Singapore 
+    ##                      2                      3                     47 
+    ##               Slovenia           South Africa            South Korea 
+    ##                      1                      1                     55 
+    ##                  Spain              Sri Lanka                 Sweden 
+    ##                     16                      2                      9 
+    ##            Switzerland                 Taiwan               Thailand 
+    ##                     11                     33                     30 
+    ##                Tunisia                     UK                Ukraine 
+    ##                      1                     16                      1 
+    ##   United Arab Emirates                     US                Vietnam 
+    ##                     14                     99                     13
 
 ``` r
 virus$Country.Region == "Mainland China"
@@ -1231,7 +1269,16 @@ virus$Country.Region == "Mainland China"
     ## [2737] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
     ## [2749] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
     ## [2761]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-    ## [2773]  TRUE  TRUE  TRUE  TRUE  TRUE
+    ## [2773]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+    ## [2785] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+    ## [2797] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+    ## [2809] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+    ## [2821] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
+    ## [2833] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE
+    ## [2845] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+    ## [2857]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ## [2869]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
+    ## [2881]  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
 
 ## number of total cases in `Mainland.China`
 
@@ -1239,7 +1286,7 @@ virus$Country.Region == "Mainland China"
 sum(virus[virus$Country.Region == "Mainland China", "cases"])
 ```
 
-    ## [1] 133207
+    ## [1] 135675
 
 ``` r
 China_total <- sum(virus[virus$Country.Region == "Mainland China", "cases"])
@@ -1404,6 +1451,8 @@ dplyr::filter(virus, Country.Region == "Mainland China", virus$type == "death")
     ## 133          Hubei Mainland China 30.97560 112.2707 2020-03-03    32 death
     ## 134 Inner Mongolia Mainland China 44.09350 113.9448 2020-03-03     1 death
     ## 135          Hubei Mainland China 30.97560 112.2707 2020-03-04    36 death
+    ## 136         Hainan Mainland China 19.19590 109.7453 2020-03-05     1 death
+    ## 137          Hubei Mainland China 30.97560 112.2707 2020-03-05    31 death
 
 ``` r
 virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"]
@@ -1416,13 +1465,13 @@ virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"]
     ##  [73]   1   1   1   1   2   1 147   1   2 139 100   1   2   2   3  93   1   1
     ##  [91]   3 132   1   1   1   1 108   1   1   1   1   1 115   1   1   1   1   1
     ## [109] 202   1   1   1   1 149   1   1  68   1  52   1   1   1  26   2  41   1
-    ## [127]   1   1  45   1  34  42  32   1  36
+    ## [127]   1   1  45   1  34  42  32   1  36   1  31
 
 ``` r
 sum(virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 2981
+    ## [1] 3013
 
 ``` r
 China_deaths <- sum(virus[virus$Country.Region == "Mainland China" & virus$type == "death", "cases"])
@@ -1434,7 +1483,7 @@ China_deaths <- sum(virus[virus$Country.Region == "Mainland China" & virus$type 
 round(China_deaths/China_total * 100, 2)
 ```
 
-    ## [1] 2.24
+    ## [1] 2.22
 
 ## Q5. What is the death rate in Italy, Iran and the US?
 
@@ -1446,7 +1495,7 @@ round(China_deaths/China_total * 100, 2)
 sum(virus[virus$Country.Region == "Italy" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 107
+    ## [1] 148
 
 ``` r
 Italy_deaths <- sum(virus[virus$Country.Region == "Italy" & virus$type == "death", "cases"])
@@ -1460,6 +1509,7 @@ virus[virus$Country.Region == "Italy", "cases"]
 
     ##  [1]   2   1  17   1  42   1   1  93   1   1  74   4  -1  93   3 131   2   2 202
     ## [20]   5  42 233   4   1 240   8 566   5  37 342  18  66 466  27  11 587  28 116
+    ## [39] 769  41 138
 
 \#\#use this for total cases
 
@@ -1467,7 +1517,7 @@ virus[virus$Country.Region == "Italy", "cases"]
 sum(virus[virus$Country.Region == "Italy", "cases"])
 ```
 
-    ## [1] 3472
+    ## [1] 4420
 
 ``` r
 Italy_total <- sum(virus[virus$Country.Region == "Italy", "cases"])
@@ -1477,7 +1527,7 @@ Italy_total <- sum(virus[virus$Country.Region == "Italy", "cases"])
 round(Italy_deaths/Italy_total * 100, 2)
 ```
 
-    ## [1] 3.08
+    ## [1] 3.35
 
 \#\#Iran
 
@@ -1487,7 +1537,7 @@ round(Italy_deaths/Italy_total * 100, 2)
 sum(virus[virus$Country.Region == "Iran" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 92
+    ## [1] 107
 
 ``` r
 Iran_deaths <- sum(virus[virus$Country.Region == "Iran" & virus$type == "death", "cases"])
@@ -1499,7 +1549,7 @@ Iran_deaths <- sum(virus[virus$Country.Region == "Iran" & virus$type == "death",
 sum(virus[virus$Country.Region == "Iran", "cases"])
 ```
 
-    ## [1] 3566
+    ## [1] 4359
 
 ``` r
 Iran_total <- sum(virus[virus$Country.Region == "Iran", "cases"])
@@ -1509,7 +1559,7 @@ Iran_total <- sum(virus[virus$Country.Region == "Iran", "cases"])
 round(Iran_deaths/Iran_total * 100, 2)
 ```
 
-    ## [1] 2.58
+    ## [1] 2.45
 
 \#US
 
@@ -1517,7 +1567,7 @@ round(Iran_deaths/Iran_total * 100, 2)
 sum(virus[virus$Country.Region == "US" & virus$type == "death", "cases"])
 ```
 
-    ## [1] 11
+    ## [1] 12
 
 ``` r
 US_deaths <- sum(virus[virus$Country.Region == "US" & virus$type == "death", "cases"])
@@ -1529,7 +1579,7 @@ US_deaths <- sum(virus[virus$Country.Region == "US" & virus$type == "death", "ca
 sum(virus[virus$Country.Region == "US", "cases"])
 ```
 
-    ## [1] 172
+    ## [1] 241
 
 ``` r
 US_total <- sum(virus[virus$Country.Region == "US", "cases"])
@@ -1539,4 +1589,4 @@ US_total <- sum(virus[virus$Country.Region == "US", "cases"])
 round(US_deaths/US_total * 100, 2)
 ```
 
-    ## [1] 6.4
+    ## [1] 4.98
