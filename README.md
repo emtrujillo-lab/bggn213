@@ -8,7 +8,7 @@ This is my classwork from [BGGN-213 Winter quarter 2020](https://bioboot.github.
 - Class 07:
 - Class 08:
 - Class 09:
-- Class 10:
+- Class 10: Learnign Project on Wisconsin Cancer data (https://github.com/emtrujillo-lab/bggn213/blob/master/Class10/class%2010%20updated/class-10-updated.md)
 - Class 11:
 - Class 12:
 - Class 13:
