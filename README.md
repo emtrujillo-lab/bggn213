@@ -3,8 +3,7 @@
 
 This is my classwork from [BGGN-213 Winter quarter 2020](https://bioboot.github.io/bggn213_W20/) at UC San Diego.
 
-- Class 04: Intro to R
-- Class 05: R Graphics
+- Class 05: R Graphics (https://github.com/emtrujillo-lab/bggn213/blob/master/Class05/class05/Class-05.md)
 - Class 06:
 - Class 07:
 - Class 08:
