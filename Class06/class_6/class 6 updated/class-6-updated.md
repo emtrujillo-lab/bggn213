@@ -146,6 +146,6 @@ this_plot(xmen)
     ##   Note: Accessing on-line PDB file
 
     ## Warning in get.pdb(file, path = tempdir(), verbose = FALSE): C:
-    ## \Users\eliza\AppData\Local\Temp\RtmpERSUFp/4AKE.pdb exists. Skipping download
+    ## \Users\eliza\AppData\Local\Temp\RtmpKgXVf7/4AKE.pdb exists. Skipping download
 
 ![](class-6-updated_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
