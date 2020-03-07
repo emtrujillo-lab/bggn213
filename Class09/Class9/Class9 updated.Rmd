@@ -168,9 +168,11 @@ cutree(hc, k=3.5)
 
 ##Using different hierarchical clustering methods
 
-hc.complete <- hclust(d, method="complete")
-hc.average <- hclust(d, method="average")
-hc.single <- hclust(d, method="single")
+##hc.complete <- hclust(d, method="complete")
+##hc.average <- hclust(d, method="average")
+##hc.single <- hclust(d, method="single")
+
+
 
 # Step 1. Generate some example data for clustering
 ```{r}
