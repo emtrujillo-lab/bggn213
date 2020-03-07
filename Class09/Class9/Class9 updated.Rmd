@@ -1,0 +1,344 @@
+---
+title: "Class 9 updated"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##K-means clustering
+
+Let's try the kmeans() function in R to cluster some made-up example data
+
+#tmp
+##c puts things into a vector
+##first call to R gives me 30 points with a mean of -3 (30 points clustered around -3)
+##second call to R gives me 30 points with a mean of 3 (30 points clustered around 3)
+
+##cbind binds data?? and will put x as first column, and y as a second column 
+##rev means list the numbers in reverse
+
+```{r}
+tmp <- c(rnorm(30,-3), rnorm(30,3))
+
+x <- cbind(x=tmp, y=rev(tmp))
+
+plot(x)
+```
+
+#KM is KMEANSs(x, CENTERS=2, NSTART=20)
+```{r}
+km <- kmeans (x, centers =2, nstart=20)
+```
+```{r}
+print(km)
+```
+
+##clustering vectors - the different clusters (cluster 1 and cluster 2)
+
+##What is the output object 'km' ? 
+##Atributes function to find this information use 'attributes()'
+
+```{r}
+attributes(km)
+```
+
+##size gives you the number of points for vector 1 and 2
+```{r}
+km$size
+```
+
+
+#cluster is a vector of integers indicating the cluster to which each point is allocated
+
+```{r}
+km$cluster
+```
+
+##let's check how many 2s and 1s are in this vector with the cluster function
+```{r}
+table(km$cluster)
+```
+
+
+##plot x colored by the kmenas cluster assignment and add cluster centers as blue points
+```{r}
+plot(x, col=km$cluster)
+```
+
+```{r}
+c(rep("red", 30), rep("blue", 30))
+```
+
+```{r}
+plot(x, col=km$cluster+1)
+```
+
+
+```{r}
+plot(x, col=km$cluster+2)
+```
+
+
+```{r}
+plot(x, col=km$cluster)
+points(km$centers, col="blue")
+```
+
+##pch is for characters so you can get a big blue square
+
+```{r}
+plot(x, col=km$cluster)
+points(km$centers, col="blue", pch=15)
+```
+
+#can change shape of pch if you assign it a different number
+
+```{r}
+plot(x, col=km$cluster)
+points(km$centers, col="blue", pch=17)
+```
+
+#dist to calculate the distance
+##HCLUST(DIST(X)) calcualting distance matrix
+
+#the hclust() function is the main hierarchcal clustering method in R and it **must** be passed a **distance matrix** as input not your raw data!
+
+#you can call seqeunce identities here, or structures
+```{r}
+hc <- hclust(dist(x))
+```
+
+```{r}
+hc
+```
+
+```{r}
+plot(hc)
+```
+
+##1st vector contains points 1-30, 2nd vector contains points 31 - 60
+
+#cut below red line and get two branches
+
+```{r}
+plot(hc)
+abline(h=6, col="red")
+```
+
+#tell it a height of where to cut (cut by height **h**)
+#lty to get a dashed line
+
+```{r}
+plot(hc)
+abline(h=6, col="red", lty=2)
+cutree(hc, h=6)
+```
+
+##Now cut them into kgroups
+#the higher the k gropu number, the higher the number of groups you get
+```{r}
+plot(hc)
+abline(h=6, col="red", lty=2)
+abline(h=6, col="blue", lty=2)
+cutree(hc, k=3.5) # Cut into k grps
+```
+
+##use a table to see how many points in each group
+```{r}
+table(cutree(hc, h=3.5))
+```
+
+
+##ask for k instead; you can also ask `cutree()` for the `k` number of gorups that you want
+
+```{r}
+cutree(hc, k=5)
+```
+
+```{r}
+cutree(hc, k=3.5)
+```
+
+##Using different hierarchical clustering methods
+
+hc.complete <- hclust(d, method="complete")
+hc.average <- hclust(d, method="average")
+hc.single <- hclust(d, method="single")
+
+# Step 1. Generate some example data for clustering
+```{r}
+x <- rbind(
+matrix(rnorm(100, mean=0, sd=0.3), ncol = 2), # c1
+matrix(rnorm(100, mean=1, sd=0.3), ncol = 2), # c2
+matrix(c(rnorm(50, mean=1, sd=0.3), # c3
+rnorm(50, mean=0, sd=0.3)), ncol = 2))
+colnames(x) <- c("x", "y")
+```
+
+
+# Step 2. Plot the data without clustering
+```{r}
+plot(x)
+```
+
+# Step 3. Generate colors for known clusters
+# (just so we can compare to hclust results)
+```{r}
+col <- as.factor( rep(c("c1","c2","c3"), each=50) )
+plot(x, col=col)
+```
+
+
+#Q. Use the dist(), hclust(), plot() and cutree()
+functions to return 2 and 3 clusters
+
+#membership factor (grps3)
+
+#Q. How does this compare to your known 'col' groups?
+
+```{r}
+hc <- hclust(dist(x))
+plot(hc)
+```
+```{r}
+grps3 <- cutree(hc, k=3)
+grps3
+```
+
+```{r}
+table(grps3)
+```
+
+#color it by the membership (grps3) factor
+```{r}
+plot(x, col=grps3)
+```
+
+```{r}
+table(grps3)
+```
+
+##set up a cross table
+
+##this will show you the points that were false-positives (the smallest number in the table per c1, c2, or c3)
+```{r}
+table(grps3, col)
+```
+#**this should have given me a tale c1, c2, c3 rows and 1, 2, 3 columns**
+
+#Principal Component Analysis (PCA) the absolute basics
+#when you have a tone of cell lines
+#*PCA converst correlation or lack there of a represenation that you can actually look at* PCA shows us that those that cluster together are similar
+
+#*the x-axis (PC1) are more important*
+
+
+#the main function in bas R for PCA is called prcomp(). Here we will use PCA to examine the funny food that folks eat in the UK and N. Ireland
+
+
+```{r}
+x <- read.csv("UK_foods.csv")
+```
+
+
+
+## Preview the first 6 rows
+```{r}
+rownames(x) <- x[,1]
+x <- x[,-1]
+head(x)
+```
+
+spotting major differences in trends
+```{r}
+barplot(as.matrix(x), beside=T, col=rainbow(nrow(x)))
+```
+
+
+
+```{r}
+pairs(x, col=rainbow(10), pch=16)
+```
+
+# Use the prcomp() PCA function 
+##t means transpose (from math)
+```{r}
+pca <- prcomp(t(x))
+```
+
+#gives the standard deviation
+#looking at portion of variance. look at most amount of variance
+```{r}
+summary(pca)
+```
+
+##second and third row from above are in percentages
+
+#look at the arributes
+
+
+
+# Plot PC1 vs PC2
+```{r}
+plot(pca$x[,], pca$x[,], xlab="PC1", ylab="PC2", xlim=c(-270,500))
+text(pca$x[,1], pca$x[,2], colnames(x)) #this adds text for x and y coordinates and the country names
+```
+
+#Customize your plot so that the colors of the country names match the colors in our UK and Ireland map and table at start of this document
+
+```{r}
+plot(pca$x[,], pca$x[,], xlab="PC1", ylab="PC2", xlim=c(-270,500))
+text(pca$x[,1], pca$x[,2], colnames(x), col=c("black", "red", "blue", "dark green")) 
+
+#adding colors: black for england b/c first on the table, wales in red, scotland in blue, and ireland in dark green
+```
+
+#gives me a barplot
+```{r}
+plot(pca)
+```
+
+## Lets focus on PC1 as it accounts for > 90% of variance 
+```{r}
+
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,1], las=2 )
+```
+
+```{r}
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,2], las=2 )
+```
+
+
+```{r}
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,3], las=2 )
+```
+
+
+```{r}
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,1], las=1 )
+```
+
+#las gives you just one word and changes the y-axis
+
+```{r}
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,1], las=3 )
+```
+
+
+
+
+
+
+
