@@ -91,8 +91,8 @@ methylationSummary  <- AlignToReference(methylatedSimulatedReads, refSeq, readLe
 ```
 
     ##      refCGpositions CpGs TpGs methylatedFraction
-    ## [1,]              1    8    5          0.6153846
-    ## [2,]             16   53   39          0.5760870
-    ## [3,]             25   74   36          0.6727273
-    ## [4,]             34   56   26          0.6829268
-    ## [5,]             44   41   22          0.6507937
+    ## [1,]              1    6    8          0.4285714
+    ## [2,]             16   61   36          0.6288660
+    ## [3,]             25   57   28          0.6705882
+    ## [4,]             34   75   38          0.6637168
+    ## [5,]             44   45   19          0.7031250
