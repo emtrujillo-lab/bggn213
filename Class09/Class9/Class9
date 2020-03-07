@@ -3,6 +3,10 @@ title: "Class 9 updated"
 output: github_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -291,10 +295,11 @@ text(pca$x[,1], pca$x[,2], colnames(x)) #this adds text for x and y coordinates 
 
 #Customize your plot so that the colors of the country names match the colors in our UK and Ireland map and table at start of this document
 
-#adding colors: black for england b/c first on the table, wales in red, scotland in blue, and ireland in dark green
 ```{r}
 plot(pca$x[,], pca$x[,], xlab="PC1", ylab="PC2", xlim=c(-270,500))
 text(pca$x[,1], pca$x[,2], colnames(x), col=c("black", "red", "blue", "dark green")) 
+
+#adding colors: black for england b/c first on the table, wales in red, scotland in blue, and ireland in dark green
 ```
 
 #gives me a barplot
@@ -304,6 +309,7 @@ plot(pca)
 
 ## Lets focus on PC1 as it accounts for > 90% of variance 
 ```{r}
+
 par(mar=c(10, 3, 0.35, 0))
 barplot( pca$rotation[,1], las=2 )
 ```
@@ -331,8 +337,6 @@ barplot( pca$rotation[,1], las=1 )
 par(mar=c(10, 3, 0.35, 0))
 barplot( pca$rotation[,1], las=3 )
 ```
-
-##great
 
 
 
