@@ -208,8 +208,8 @@ pdb <- read.pdb("1hel")
 modes <- nma( pdb )
 ```
 
-    ##  Building Hessian...     Done in 0 seconds.
-    ##  Diagonalizing Hessian...    Done in 0.06 seconds.
+    ##  Building Hessian...     Done in 0.02 seconds.
+    ##  Diagonalizing Hessian...    Done in 0.08 seconds.
 
 ``` r
 m7 <- mktrj(modes, mode=7, file="mode_7.pdb")
@@ -306,5 +306,3 @@ library(DESeq2)
     ## The following objects are masked from 'package:base':
     ## 
     ##     aperm, apply, rowsum
-
-\#\#haha
