@@ -8,8 +8,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+## This function will generate random substrings from the larger reference sequence
 ```{r}
-## This function will generate random substrings from the larger reference sequence 
 GenerateSimulatedReads <- function(refSequence, readLength, numberOfReadsToSimulate) {
   
   startPositions <- sample(x = c(1:(nchar(refSequence) - readLength)), size = numberOfReadsToSimulate, replace = T)

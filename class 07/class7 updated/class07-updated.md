@@ -1,8 +1,9 @@
-Class 7 updated
+Class 7
 ================
 
+## This function will generate random substrings from the larger reference sequence
+
 ``` r
-## This function will generate random substrings from the larger reference sequence 
 GenerateSimulatedReads <- function(refSequence, readLength, numberOfReadsToSimulate) {
   
   startPositions <- sample(x = c(1:(nchar(refSequence) - readLength)), size = numberOfReadsToSimulate, replace = T)
@@ -90,8 +91,8 @@ methylationSummary  <- AlignToReference(methylatedSimulatedReads, refSeq, readLe
 ```
 
     ##      refCGpositions CpGs TpGs methylatedFraction
-    ## [1,]              1    9    4          0.6923077
-    ## [2,]             16   50   30          0.6250000
-    ## [3,]             25   61   26          0.7011494
-    ## [4,]             34   77   30          0.7196262
-    ## [5,]             44   42   21          0.6666667
+    ## [1,]              1    8    5          0.6153846
+    ## [2,]             16   53   39          0.5760870
+    ## [3,]             25   74   36          0.6727273
+    ## [4,]             34   56   26          0.6829268
+    ## [5,]             44   41   22          0.6507937
