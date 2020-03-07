@@ -208,9 +208,103 @@ pdb <- read.pdb("1hel")
 modes <- nma( pdb )
 ```
 
-    ##  Building Hessian...     Done in 0.02 seconds.
-    ##  Diagonalizing Hessian...    Done in 0.08 seconds.
+    ##  Building Hessian...     Done in 0 seconds.
+    ##  Diagonalizing Hessian...    Done in 0.06 seconds.
 
 ``` r
 m7 <- mktrj(modes, mode=7, file="mode_7.pdb")
 ```
+
+``` r
+library(DESeq2)
+```
+
+    ## Loading required package: S4Vectors
+
+    ## Loading required package: stats4
+
+    ## Loading required package: BiocGenerics
+
+    ## Loading required package: parallel
+
+    ## 
+    ## Attaching package: 'BiocGenerics'
+
+    ## The following objects are masked from 'package:parallel':
+    ## 
+    ##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    ##     clusterExport, clusterMap, parApply, parCapply, parLapply,
+    ##     parLapplyLB, parRapply, parSapply, parSapplyLB
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     IQR, mad, sd, var, xtabs
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    ##     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    ##     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    ##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    ##     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    ##     union, unique, unsplit, which, which.max, which.min
+
+    ## 
+    ## Attaching package: 'S4Vectors'
+
+    ## The following object is masked from 'package:base':
+    ## 
+    ##     expand.grid
+
+    ## Loading required package: IRanges
+
+    ## 
+    ## Attaching package: 'IRanges'
+
+    ## The following object is masked from 'package:bio3d':
+    ## 
+    ##     trim
+
+    ## The following object is masked from 'package:grDevices':
+    ## 
+    ##     windows
+
+    ## Loading required package: GenomicRanges
+
+    ## Loading required package: GenomeInfoDb
+
+    ## Loading required package: SummarizedExperiment
+
+    ## Loading required package: Biobase
+
+    ## Welcome to Bioconductor
+    ## 
+    ##     Vignettes contain introductory material; view with
+    ##     'browseVignettes()'. To cite Bioconductor, see
+    ##     'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+    ## Loading required package: DelayedArray
+
+    ## Loading required package: matrixStats
+
+    ## 
+    ## Attaching package: 'matrixStats'
+
+    ## The following objects are masked from 'package:Biobase':
+    ## 
+    ##     anyMissing, rowMedians
+
+    ## Loading required package: BiocParallel
+
+    ## 
+    ## Attaching package: 'DelayedArray'
+
+    ## The following objects are masked from 'package:matrixStats':
+    ## 
+    ##     colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     aperm, apply, rowsum
+
+\#\#haha
