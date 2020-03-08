@@ -1,4 +1,4 @@
-Class05
+Data exploration and visualization in R
 ================
 
 ## GitHub Documents
