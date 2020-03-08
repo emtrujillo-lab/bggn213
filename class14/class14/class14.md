@@ -1,4 +1,4 @@
-Class14
+Genome informatics and high throughput sequencing (Part 1)
 ================
 
 ## GitHub Documents
