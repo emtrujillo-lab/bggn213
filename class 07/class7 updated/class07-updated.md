@@ -1,4 +1,4 @@
-Class 7
+Epigenetics and 3D genome organization
 ================
 
 ## This function will generate random substrings from the larger reference sequence
