@@ -1,0 +1,129 @@
+---
+title: "class 17 "
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##add the following to your console 
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#    install.packages("BiocManager")
+
+#Install these packages
+#BiocManager::install("RCy3")
+
+#install.packages("igraph")
+
+#install.packages("RColorBrewer")
+
+```{r}
+library(RCy3)
+library(igraph)
+```
+
+```{r}
+library(RColorBrewer)
+```
+
+##Connect to Cytospace and test whether you are connected
+
+```{r}
+cytoscapePing()
+
+```
+
+##what version do you have?
+```{r}
+cytoscapeVersionInfo()
+```
+
+#send your sample network to cytospace
+```{r}
+g <- makeSimpleIgraph()
+createNetworkFromIgraph(g,"myGraph")
+```
+
+```{r}
+setVisualStyle("Marquee")
+```
+
+
+##save the image from cytospace in this document 
+
+```{r}
+fig <- exportImage(filename="demo_marquee", type="png", height=350)
+```
+
+```{r}
+knitr::include_graphics("./demo_marquee.png")
+```
+
+```{r}
+plot(g)
+```
+
+
+##get a new file to read and rename. Then, view the first 6 rows
+```{r}
+prok_vir_cor <- read.delim("virus_prok_cor_abundant.tsv", stringsAsFactors = FALSE)
+
+## Have a peak at the first 6 rows
+head(prok_vir_cor)
+```
+
+
+
+```{r}
+g2 <- graph.data.frame(prok_vir_cor, directed = FALSE)
+```
+
+```{r}
+class(g2)
+```
+
+```{r}
+plot(g2)
+```
+
+##clean up this mess to see the different communities
+
+```{r}
+plot(g2, vertex.size=3, vertex.label=NA)
+```
+
+
+```{r}
+createNetworkFromIgraph(g2,"myIgraph")
+```
+
+##For network community detection
+
+```{r}
+cb <- cluster_edge_betweenness(g2)
+```
+
+```{r}
+cb
+```
+
+##plot 
+
+```{r}
+plot(cb, y=g2, vertex.label=NA,  vertex.size=3)
+```
+
+##Centrality analysis. How importnat is a node or edge? This will help you find which nodes are the most important and why they are the most important. 
+
+```{r}
+pr <- page_rank(g2)
+head(pr$vector)
+```
+
+#make a size vector that is between 2 and 20 
+```{r}
+v.size <- BBmisc::normalize(pr$vector, range=c(2,20), method="range")
+plot(g2, vertex.size=v.size, vertex.label=NA)
+```
+

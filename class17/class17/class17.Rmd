@@ -201,3 +201,21 @@ US_total <- sum(virus[virus$Country.Region == "US", "cases"])
 round(US_deaths/US_total * 100, 2)
 ```
 
+
+##extra notes
+
+
+##library(dplyr)
+
+##virus %>% group-by(Country.Region) %>%
+  summarized(sum(cases) %>%))
+
+
+
+## how many infected by country
+cases_by_country <- virus %>%
+group_by(Country.Region) %>%
+summarise(tot=sum(cases)) %>%
+arrange(desc(tot))
+
+head(cases_by_country)

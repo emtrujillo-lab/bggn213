@@ -1,5 +1,5 @@
 ---
-title: "Tara Oceans"
+title: "Class 17 Tara Oceans"
 output: github_document
 ---
 
@@ -36,7 +36,7 @@ cytoscapePing()
 cytoscapeVersionInfo()
 ```
 
-##test thigs further makin a little sample network and 
+##test thigs further making a little sample network and 
 
 ```{r}
 g <- makeSimpleIgraph()
