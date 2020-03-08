@@ -1,4 +1,4 @@
-Class 6 hw
+Why, when and how of writing your own R functions
 ================
 
 ## GitHub Documents
