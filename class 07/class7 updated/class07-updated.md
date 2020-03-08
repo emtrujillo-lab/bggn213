@@ -14,13 +14,13 @@ GenerateSimulatedReads <- function(refSequence, readLength, numberOfReadsToSimul
 }
 ```
 
-# sample(x = c(10), size = 5, replace = T)
+## sample(x = c(10), size = 5, replace = T)
 
-# substring(as.character(“ATCGCGCATATACCGATCGT”), c(1,3,5), c(3,9,12))
+## substring(as.character(“ATCGCGCATATACCGATCGT”), c(1,3,5), c(3,9,12))
 
-# sequenceVector = substring(as.character(“ATCGCGCATATACCGATCGT”), c(1,3,5), c(3,9,12))
+## sequenceVector = substring(as.character(“ATCGCGCATATACCGATCGT”), c(1,3,5), c(3,9,12))
 
-# sequenceDataFrame \<- data.frame(c(1,3,5), c(3,9,12), sequenceVector, stringsAsFactors = FALSE)
+## sequenceDataFrame \<- data.frame(c(1,3,5), c(3,9,12), sequenceVector, stringsAsFactors = FALSE)
 
 ## Methylate CpG dinucleoties in simulated reads with a given probability
 
@@ -36,11 +36,11 @@ ConvertCG <- function(simulatedReads, methylationProbability) {
 }
 ```
 
-# simulatedReads\[grep(“CG”,simulatedReads$sequenceVector),\]
+## simulatedReads\[grep(“CG”,simulatedReads$sequenceVector),\]
 
-# sum(rbinom(30,1,0.4))
+## sum(rbinom(30,1,0.4))
 
-# gsub(“CG”,“TG”,“CCCGAGAG”)
+## gsub(“CG”,“TG”,“CCCGAGAG”)
 
 ## Re-align simulated reads back to the reference genome and calculate methylation ratios for CpGs
 
@@ -69,15 +69,15 @@ AlignToReference <- function(meSimReads=methylatedSimulatedReads, refSequence, r
 }
 ```
 
-# refSequence = “CGGGATGAAGGCCCCCGA”
+## refSequence = “CGGGATGAAGGCCCCCGA”
 
-# allKmers = substring(refSequence, 1:(nchar(refSequence) - 5 + 1), 5:nchar(refSequence))
+## allKmers = substring(refSequence, 1:(nchar(refSequence) - 5 + 1), 5:nchar(refSequence))
 
-# refCGpositions = grep(“CG”,substring(refSequence,1:(nchar(refSequence)-1),2:nchar(refSequence)))
+## refCGpositions = grep(“CG”,substring(refSequence,1:(nchar(refSequence)-1),2:nchar(refSequence)))
 
-# which(adist(allKmers, “ATGAA”)==0)
+## which(adist(allKmers, “ATGAA”)==0)
 
-# which(adist(allKmers, “CCCTG”)==1)
+## which(adist(allKmers, “CCCTG”)==1)
 
 ``` r
 refSeq="CGGGATGAAGGCCCCCGAGCTCCCCGAGAGCAGCGTCAGGGCACGGATGC"
