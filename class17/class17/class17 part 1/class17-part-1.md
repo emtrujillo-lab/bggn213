@@ -1,4 +1,4 @@
-class 17
+Biological Network Analysis
 ================
 
 \#\#add the following to your console \# if
