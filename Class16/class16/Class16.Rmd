@@ -12,48 +12,38 @@ knitr::opts_chunk$set(echo = TRUE)
 This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
 
 ```{r}
-metaFile <- "data/GSE37704_metadata.csv"
-countFile <- "data/GSE37704_featurecounts.csv"
+metaFile <- "GSE37704_metadata.csv"
+countFile <- "GSE37704_featurecounts.csv"
 ```
 
 ## Import metadata and take a peak
 
 ```{r}
-colData = read.csv("GSE37704_metadata.csv", row.names=1)
+colData = read.csv(metaFile, row.names=1)
 head(colData)
 ```
 
 ##Import countdata
 
 ```{r}
-rawcountData = read.csv("GSE37704_featurecounts.csv", row.names=1)
-head(countData)
+rawcountData = read.csv(countFile, row.names=1)
+head(rawcountData)
 ```
 
 
 ##the `colData` does not match with countData b/c first column in `countData` is actually **length**
 
 ```{r}
-countData[ ,1]
-```
-
-##print everythig but the first column
-
-```{r}
-countData <- countData[ ,-1]
+countData <- as.matrix(rawcountData[,-1])
 head(countData)
 ```
+
 
 ##to find the number of rows and columns, respectively
 ```{r}
 dim(countData)
 ```
 
-##remove those rows with `zero` but you don't need these. use `rowSums()`
-
-```{r}
-rowSums(countData) == 0
-```
 
 ##ust the TRUE FALSE to look up countData
 ```{r}
@@ -75,14 +65,32 @@ countData <- countData[rowSums(countData) != 0, ] ##this calls the rows that are
 dim(countData)
 ```
 
+```{r}
+validcountData <- countData[ rowSums(countData) != 0 , ]
+head(validcountData)
+dim(validcountData)
+```
+
+#Run the DESeq2
 ##Run DESeqDataSet object required for the `DESeq()` function and then run the `DESeq` pipeline. This is again similar to our last days hands-on session.
 
+```{r}
+library(DESeq)
+library(DESeq2)
+```
+
+```{r}
+library(BiocVersion)
+```
 
 
 ```{r}
-dds = DESeqDataSetFromMatrix(countData=countData,
-                             colData=colData,
-                             design=~condition)
+
+dds = DESeqDataSetFromMatrix(countData = countData, colData = colData, design =~ condition)
+
+```
+
+```{r}
 dds = DESeq(dds)
 ```
 
@@ -248,7 +256,7 @@ attributes(keggres)
 ```
 
 ```{r}
-keggres$less    #show those that are "less"
+keggres$less   #show those that are "less"
 ```
 
 ##look at the pathway id of the first hit `cell cycle`
@@ -327,20 +335,5 @@ print(paste("Total number of significant genes:", length(sig_genes)))
 ```{r}
 write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
 ```
-
-#now go to the reactome website
-
-x <- 1:10 Predict without using R the result of: x[ c(TRUE, FALSE) ]
-```{r}
-x <- 1:10
-x[ c(TRUE, FALSE) ]
-```
-```{r}
-1:10 * 10
-```
-```{r}
-c("a", 1, TRUE)
-```
-
 
 
