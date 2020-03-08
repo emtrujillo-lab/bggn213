@@ -1,4 +1,4 @@
-Class 10 updated
+Learnign Project on Wisconsin Cancer data
 ================
 
 \#\#PRCOMP(x, SCALE = T)
