@@ -1,4 +1,4 @@
-Class 9 updated
+Principal Component Analysis (PCA)
 ================
 
 \#\#K-means clustering
