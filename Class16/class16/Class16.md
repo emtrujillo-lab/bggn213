@@ -1,4 +1,4 @@
-Class16 using DESeq2 for Differential Expression Analysis
+DESeq2 for Differential Expression Analysis
 ================
 
 ## GitHub Documents
