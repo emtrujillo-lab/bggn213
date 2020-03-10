@@ -12,7 +12,7 @@ metaFile <- "GSE37704_metadata.csv"
 countFile <- "GSE37704_featurecounts.csv"
 ```
 
-## Import metadata and take a peak
+## Import metadata and take a look
 
 \#\#Import countdata
 
