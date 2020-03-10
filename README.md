@@ -11,7 +11,7 @@ This is my classwork from [BGGN-213 Winter quarter 2020](https://bioboot.github.
 - Class 13:[Structure Base Drug Design](https://github.com/emtrujillo-lab/bggn213/blob/master/class13/class13/class13.md)
 - Class 14:[Genome informatics and high throughput sequencing (Part 1)](https://github.com/emtrujillo-lab/bggn213/blob/master/class14/class14/class14.md)
 - Class 15:[Transcriptomics](https://github.com/emtrujillo-lab/bggn213/blob/master/class15/class15/class15.md)
-- Class 16: [Using DESeq2 for Differential Expression Analysis](https://raw.githubusercontent.com/emtrujillo-lab/bggn213/master/Class16/class16/Class16.md)
+- Class 16: [Using DESeq2 for Differential Expression Analysis](https://github.com/emtrujillo-lab/bggn213/blob/master/Class16/class16/Class16.md)
 - Class 17 Part 1: [Biological Network Analysis](https://github.com/emtrujillo-lab/bggn213/blob/master/class17/class17/class17%20part%201/class17-part-1.md)
 - Class 17: [Using RStudio to Calculate Coronavirus Death Rates](https://github.com/emtrujillo-lab/bggn213/blob/master/class17/class17/class17.md)
 
