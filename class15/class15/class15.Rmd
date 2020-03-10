@@ -1,5 +1,5 @@
 ---
-title: "Class 15 Transcriptomics"
+title: "Transcriptomics"
 output: github_document
 ---
 
@@ -13,11 +13,11 @@ This is an R Markdown format used for publishing markdown documents to GitHub. W
 
 ## reasd the files you downloaded (countData and colDATA)
 
-```{r}
+```{r include=FALSE}
 read.csv("airway_scaledcounts.csv", stringsAsFactors = FALSE)
 ```
 
-```{r}
+```{r include=FALSE}
 read.csv("airway_metadata.csv", stringsAsFactors = FALSE)
 ```
 
@@ -30,7 +30,7 @@ metadata <-  read.csv("airway_metadata.csv", stringsAsFactors = FALSE)
 
 ##how many genes do we have in thei dataset? `nrow(counts)`
 
-```{r}
+```{r include=FALSE}
 head(counts)
 ```
 
@@ -40,24 +40,26 @@ nrow(counts)
 
 ##in order to compare the treatment patients to the control groups data ... we have to find the mean of the `control` first 
 
-```{r}
-metadata
+```{r include=FALSE}
+head(metadata)
 ```
 
 ##`dex` column has the `control` and `treatment` groups. 
 
 ```{r}
 metadata$dex =="control"
+
+control <- metadata[metadata$dex =="control",]
 ```
 
 ##now we need to just choose the `control`. NOw choose for the rows that are `control`. i.e. which ones from the `dex` columnn are `control`?
 
-```{r}
+```{r include=FALSE}
 metadata[metadata[,"dex"]=="control",]
 ```
 
 ##this is an alternative to print out the rows that are `control`
-```{r}
+```{r include=FALSE}
 metadata[metadata$dex =="control",]
 ```
 
@@ -79,31 +81,24 @@ metadata[metadata$dex =="control", 1]
 ```
 
 ##accesss the count columns with `control$id`
+#this should print out the 4 `control` columns
 
-```{r}
-counts[ , control$id] #this should print out the 4 `control` columns
-```
-
-```{r}
-?rowSums()
+```{r include=FALSE}
+(counts[,control$id])
 ```
 
 ##to get the mean we have to use `rowSums()` and divide by the number of columns which is `4`
 
-```{r}
+```{r include=FALSE}
 rowSums(counts[ , control$id])/4
 ```
 
 ##ithis is an alternative way to calculate the `mean`
 
-```{r}
+```{r include=FALSE}
 rowSums( counts[ ,control$id] )/4
 ```
 
-
-```{r}
-
-```
 
 
 
@@ -123,7 +118,7 @@ names(control.mean) <- counts$ensgene
 
 ##now do the same for the control 
 
-```{r}
+```{r include=FALSE}
 metadata[metadata[,"dex"]=="treated",]
 ```
 
@@ -139,7 +134,7 @@ treated <- metadata[metadata[,"dex"]=="treated",]
 treated.mean <- rowMeans( counts[ ,treated$id] )/4
 ```
 
-```{r}
+```{r include=FALSE}
 treated.mean
 ```
 
@@ -148,7 +143,7 @@ treated.mean
 mycounts <- data.frame(control.mean, treated.mean)
 ```
 
-```{r}
+```{r include=FALSE}
 mycounts
 ```
 
@@ -220,7 +215,7 @@ unique(which(x==0, arr.ind = TRUE)[ , "row"]) #made it unique() to find the rows
 
 ##find `zero` rows in our mycounts object
 
-```{r}
+```{r include=FALSE}
 
 unique(which(mycounts==0, arr.ind = TRUE)[ , "row"])
 ```
@@ -231,14 +226,14 @@ to.rm <- unique(which(mycounts==0, arr.ind = TRUE)[ , "row"])
 ```
 
 
-```{r}
+```{r include=FALSE}
 mycounts[to.rm,]
 ```
 
 
 ##but we want all the ones that are `NOT ZERO`
 
-```{r}
+```{r include=FALSE}
 to.rm <- unique(which(mycounts==0, arr.ind = TRUE)[ , "row"])
 mycounts[-to.rm,]
 ```
@@ -256,7 +251,7 @@ nrow(newcounts)
 ##use `log` so that you can calculate the `fold change`. but here we use `log2` (the log-ratio of a gene's or a transcript's expression values in two different conditions. While comparing two conditions each feature you analyse gets (normalised) expression values. This value can be zero and thus lead to undefined ratios)
 
 
-```{r}
+```{r include=FALSE}
 log2(newcounts[,"treated.mean"]/newcounts[,"control.mean"])
 ```
 
@@ -264,7 +259,7 @@ log2(newcounts[,"treated.mean"]/newcounts[,"control.mean"])
 newcounts$log2fc <-log2(newcounts[,"treated.mean"]/newcounts[,"control.mean"])
 ```
 
-```{r}
+```{r include=FALSE}
 head(newcounts)
 ```
 
@@ -272,7 +267,7 @@ head(newcounts)
 
 ##common rule of thumb in the field is to use a log2fc (log2 fold change). How many of our genes are upregulated from this?
 
-```{r}
+```{r include=FALSE}
 newcounts$log2fc > 2
 ```
 
@@ -367,7 +362,7 @@ abline(v=c(-2,2), col="gray", lty=2)
 abline(h=-log(0.1), col="gray", lty=2)
 ```
 
-
+##that's all folks
 
 
 
