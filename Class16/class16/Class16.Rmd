@@ -18,14 +18,14 @@ countFile <- "GSE37704_featurecounts.csv"
 
 ## Import metadata and take a peak
 
-```{r}
+```{r include=FALSE}
 colData = read.csv(metaFile, row.names=1)
 head(colData)
 ```
 
 ##Import countdata
 
-```{r}
+```{r include=FALSE}
 rawcountData = read.csv(countFile, row.names=1)
 head(rawcountData)
 ```
@@ -33,7 +33,7 @@ head(rawcountData)
 
 ##the `colData` does not match with countData b/c first column in `countData` is actually **length**
 
-```{r}
+```{r include=FALSE}
 countData <- as.matrix(rawcountData[,-1])
 head(countData)
 ```
@@ -46,13 +46,13 @@ dim(countData)
 
 
 ##ust the TRUE FALSE to look up countData
-```{r}
+```{r include=FALSE}
 countData[rowSums(countData) == 0, ]   ##this will print out all the `0` but you don't want those
 ```
 
 ##call the rows that are not `0`
 
-```{r}
+```{r include=FALSE}
 countData[rowSums(countData) != 0, ]
 ```
 
@@ -65,7 +65,7 @@ countData <- countData[rowSums(countData) != 0, ] ##this calls the rows that are
 dim(countData)
 ```
 
-```{r}
+```{r include=FALSE}
 validcountData <- countData[ rowSums(countData) != 0 , ]
 head(validcountData)
 dim(validcountData)
@@ -161,7 +161,7 @@ columns(org.Hs.eg.db)
 
 ##need to tell `mapIds` name, format, what format we want. Let's map our ENSEMBLE gene I`Ids` to the conventional `symbol`
 
-```{r}
+```{r include=FALSE}
 mapIds(org.Hs.eg.db,
       keys= rownames(res),
       keytype="ENSEMBL",
@@ -255,7 +255,7 @@ keggres = gage(foldchanges, gsets=kegg.sets.hs)
 attributes(keggres)
 ```
 
-```{r}
+```{r include=FALSE}
 keggres$less   #show those that are "less"
 ```
 
