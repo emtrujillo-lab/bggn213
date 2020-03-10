@@ -16,4 +16,3 @@ This is my classwork from [BGGN-213 Winter quarter 2020](https://bioboot.github.
 - Class 17: [Using RStudio to Calculate Coronavirus Death Rates](https://github.com/emtrujillo-lab/bggn213/blob/master/class17/class17/class17.md)
 
 
-
